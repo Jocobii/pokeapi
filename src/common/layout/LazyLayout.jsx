@@ -1,21 +1,17 @@
 import React from 'react';
 import {
-  NavLink, Routes, Route, Navigate,
+  Routes, Route,
 } from 'react-router-dom';
-import Pokemon from '../../features/characters/pages/Pokemon';
+import Pokemon from '../../features/pokemon/pages/Pokemon';
+import Pokedex from '../../features/pokemon/pages/Pokedex';
 
 function LazyLayout() {
   return (
     <div>
       <h1>Lazy Layout</h1>
-      <ul>
-        <li>
-          <NavLink to="pokemon">Pokemon</NavLink>
-        </li>
-      </ul>
       <Routes>
-        <Route path="pokemon" element={<Pokemon />} />
-        <Route path="/*" element={<Navigate replace to="/pokemon" />} />
+        <Route path="/" element={<Pokemon />} />
+        <Route path="/:id" element={<Pokedex />} />
       </Routes>
     </div>
   );

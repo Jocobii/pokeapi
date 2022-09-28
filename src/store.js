@@ -1,9 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
-import characterSlice from './features/characters/characterSlice';
+import pokemonsSlice from './features/pokemon/pokemonSlice';
 
 const store = configureStore({
   reducer: {
-    characters: characterSlice,
+    pokemons: pokemonsSlice,
   },
 });
 

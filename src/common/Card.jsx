@@ -1,36 +1,49 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
-import { CardActionArea } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+import {
+  Card,
+  CardActions,
+  CardContent,
+  CardMedia,
+  Button,
+  Typography,
+} from '@mui/material';
 
-export default function ActionAreaCard({ title, image, description }) {
+export default function ActionAreaCard({ name, url }) {
+  const navigate = useNavigate();
+
+  const pokemonId = url?.split('/')[url.split('/').length - 2];
+  const imageUrl = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemonId}.png`;
+  const goToPokemon = () => navigate(`/pokemon/${pokemonId}`);
+
   return (
-    <Card sx={{ maxWidth: 345 }}>
-      <CardActionArea>
-        <CardMedia
-          component="img"
-          height="140"
-          image={image}
-          alt="img-alt"
-        />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
-            {title}
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            {description}
-          </Typography>
-        </CardContent>
-      </CardActionArea>
+    <Card>
+      <CardMedia
+        alt="green iguana"
+        component="img"
+        loading="lazy"
+        height="140"
+        src={imageUrl}
+        sx={{
+          objectFit: 'contain',
+        }}
+      />
+      <CardContent>
+        <Typography gutterBottom variant="h5" component="div">
+          {name}
+        </Typography>
+      </CardContent>
+      <CardActions>
+        <Button size="small" color="primary" onClick={goToPokemon}>
+          Gotcha
+        </Button>
+      </CardActions>
     </Card>
   );
 }
 
 ActionAreaCard.propTypes = {
-  title: PropTypes.string.isRequired,
-  image: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  url: PropTypes.string.isRequired,
 };

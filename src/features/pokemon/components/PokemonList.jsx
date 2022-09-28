@@ -3,24 +3,23 @@ import { useDispatch, useSelector } from 'react-redux';
 import Grid from '@mui/material/Unstable_Grid2';
 import Box from '@mui/material/Box';
 import Card from '../../../common/Card';
-import { selectCharacters, getCharacters } from '../characterSlice';
+import { selectPokemons, getCharacters } from '../pokemonSlice';
 
-function CharactersList() {
+function PokemonList() {
   const dispatch = useDispatch();
-  const characters = useSelector(selectCharacters);
+  const pokemons = useSelector(selectPokemons);
   useEffect(() => {
     dispatch(getCharacters());
   }, [dispatch]);
   return (
     <Box sx={{ bgcolor: '#cfe8fc', height: '100%' }}>
       <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-        {characters.map((character) => (
-          <Grid key={character.id} item xs={6}>
+        {pokemons.map((pokemon) => (
+          <Grid key={`card-${pokemon.name}`} item xs={2}>
             <Card
-              key={character.id}
-              title={character.name}
-              image={character.image}
-              description={character.species}
+              key={`card-${pokemon.name}`}
+              name={pokemon.name}
+              url={pokemon.url}
             />
           </Grid>
         ))}
@@ -29,4 +28,4 @@ function CharactersList() {
   );
 }
 
-export default CharactersList;
+export default PokemonList;

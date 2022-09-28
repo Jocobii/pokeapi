@@ -4,8 +4,8 @@ const LazyLayout = lazy(() => import(/* webpackChunkName: "LazyLayout" */ '../co
 
 const routes = [
   {
-    path: '/*',
-    to: '/pokemon',
+    path: '/pokemon/*',
+    to: '/pokemon/',
     Component: LazyLayout,
     name: 'Pokemon',
   },
